@@ -8,5 +8,6 @@ namespace StudentRegisterManagement.Core.Entities
 {
     public class Student
     {
+        public Guid Id { get; set; }
     }
 }
