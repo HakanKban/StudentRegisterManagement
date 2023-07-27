@@ -24,6 +24,7 @@ builder.Services.AddDbContext<MyContext>(x =>
 builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(AsyncRepository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<ILessonService, LessonService>();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 var app = builder.Build();
 

@@ -11,10 +11,12 @@ public class LessonConfugiration : IEntityTypeConfiguration<Lesson>
         builder.HasKey(x => x.Id);
         builder.HasMany(x => x.StudentLesson)
                .WithOne(x => x.Lesson)
-               .HasForeignKey(x => x.LessonId);
+               .HasForeignKey(x => x.LessonId)
+               .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasMany(x => x.Notes)
               .WithOne(x => x.Lesson)
-              .HasForeignKey(x => x.LessonId);
+              .HasForeignKey(x => x.LessonId)
+              .OnDelete(DeleteBehavior.Cascade);
     }
 }

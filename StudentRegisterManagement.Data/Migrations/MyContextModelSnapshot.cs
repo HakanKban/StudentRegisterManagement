@@ -33,7 +33,7 @@ namespace StudentRegisterManagement.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Lesson");
+                    b.ToTable("Lesson", (string)null);
                 });
 
             modelBuilder.Entity("StudentRegisterManagement.Core.Entities.Notes", b =>
@@ -56,7 +56,7 @@ namespace StudentRegisterManagement.Data.Migrations
 
                     b.HasIndex("LessonId");
 
-                    b.ToTable("Note");
+                    b.ToTable("Note", (string)null);
                 });
 
             modelBuilder.Entity("StudentRegisterManagement.Core.Entities.Student", b =>
@@ -87,7 +87,7 @@ namespace StudentRegisterManagement.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Student");
+                    b.ToTable("Student", (string)null);
                 });
 
             modelBuilder.Entity("StudentRegisterManagement.Core.Entities.StudentLesson", b =>
@@ -102,7 +102,7 @@ namespace StudentRegisterManagement.Data.Migrations
 
                     b.HasIndex("LessonId");
 
-                    b.ToTable("StudentLesson");
+                    b.ToTable("StudentLesson", (string)null);
                 });
 
             modelBuilder.Entity("StudentRegisterManagement.Core.Entities.Notes", b =>
