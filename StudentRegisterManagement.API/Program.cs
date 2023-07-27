@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using StudentRegisterManagement.Core;
 using StudentRegisterManagement.Core.Interfaces;
 using StudentRegisterManagement.Data;
 using StudentRegisterManagement.Data.Repository;
@@ -21,6 +22,7 @@ builder.Services.AddDbContext<MyContext>(x =>
 });
 builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(AsyncRepository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
