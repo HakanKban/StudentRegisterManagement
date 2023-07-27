@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using StudentRegisterManagement.Core.Interfaces;
 using StudentRegisterManagement.Data;
+using StudentRegisterManagement.Data.Repository;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,8 @@ builder.Services.AddDbContext<MyContext>(x =>
         opt.MigrationsAssembly(Assembly.GetAssembly(typeof(MyContext)).GetName().Name);
     });
 });
+builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(AsyncRepository<>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -6,5 +6,7 @@ namespace StudentRegisterManagement.Core.Interfaces
     {
         Task<int> SaveAsync();
         IAsyncRepository<Student> StudentRepository { get; }
+        IAsyncRepository<Notes> NoteRepository { get; }
+        IAsyncRepository<Lesson> LessonRepository { get; }
     }
 }
