@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using StudentRegisterManagement.Core.Enums;
 
-namespace StudentRegisterManagement.Core.Entities
+namespace StudentRegisterManagement.Core.Entities;
+public class Student : BaseEntity<Guid>
 {
-    public class Student
-    {
-        public Guid Id { get; set; }
-    }
+    public string Name { get; set; }
+    public string SurName { get; set; }
+    public short Age { get; set; }
+    public Gender Gender { get; set; }
+    public DateOnly BirthDay { get; set; }
+    public short Size { get; set; }
+    public List<StudentLesson> StudentLessons { get; set; }
+
 }

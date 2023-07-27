@@ -8,5 +8,13 @@ public class MyContext : DbContext
     public MyContext(DbContextOptions options) : base(options)
     {
     }
-    public DbSet<Student> Students { get; set; }
+    public DbSet<Student> Student { get; set; }
+    public DbSet<Notes> Note { get; set; }
+    public DbSet<Lesson> Lesson { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<StudentLesson>().HasKey(x => new { x.StudentId, x.LessonId });
+    }
+    //public DbSet<StudentLesson> StudentLesson { get; set; }
 }
