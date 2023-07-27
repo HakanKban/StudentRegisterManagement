@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentRegisterManagement.Core.Interfaces;
+using System.Linq.Expressions;
 
 namespace StudentRegisterManagement.Data.Repository
 {
@@ -10,6 +11,11 @@ namespace StudentRegisterManagement.Data.Repository
         public AsyncRepository(MyContext context)
         {
             _context = context;
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
+        {
+            return await _context.Set<T>().AnyAsync(expression);
         }
 
         public async Task CreateAsync(T entity)
@@ -33,9 +39,10 @@ namespace StudentRegisterManagement.Data.Repository
             return await _context.FindAsync<T>(new object[] {entityId} );
         }
 
-        public Task UpdateAsync(T entity)
+        public  async Task UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+           _context.Entry(entity).State = EntityState.Modified;
+            await Task.CompletedTask;
         }
     }
 }

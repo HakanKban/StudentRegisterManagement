@@ -10,6 +10,7 @@ public class StudentConfugiration : IEntityTypeConfiguration<Student>
         builder.HasKey(x => x.Id);
         builder.HasMany(x => x.StudentLessons)
                .WithOne(x => x.Student)
-               .HasForeignKey(x => x.StudentId);
+               .HasForeignKey(x => x.StudentId)
+               .OnDelete(DeleteBehavior.Cascade);
     }
 }

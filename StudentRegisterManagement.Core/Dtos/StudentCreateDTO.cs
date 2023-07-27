@@ -10,5 +10,6 @@ namespace StudentRegisterManagement.Core.Dtos
         public Gender Gender { get; set; }
         public DateOnly BirthDay { get; set; }
         public short Size { get; set; }
+        public List<LessonCreateDTO>? LessonCreateDTOs { get; set; }
     }
 }
