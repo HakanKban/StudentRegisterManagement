@@ -134,3 +134,4 @@ Bu endpoint ile öğrenci kayıtları sorgulanmaktadır.
   "error": null
 }
 ```
+**Not:** Student Ve Lesson entityleri için update ve delete işlemleri yapılabilcek endpointler bulunmaktadır. Bu endpointlerin örnek verilerler açıklanmasına ihtiyaç duyulmamıştır.
