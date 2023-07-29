@@ -23,6 +23,11 @@ namespace StudentRegisterManagement.Service
 
             if (lessonCreateDTO.StudentId != null) //Öğrenci Id verildi ise o ders ile ilşkilendirilir.
             {
+                bool isExistStudent = await _unitOfWork.StudentRepository.AnyAsync(x => x.Id == lessonCreateDTO.StudentId);
+                if (isExistStudent == false)
+                {
+                    return CustomResponse<NoContent>.Fail(404, "Öğrenci Bulunamadı");
+                }
                 lesson.StudentLesson = new();
                 lesson.StudentLesson.Add(new StudentLesson() { StudentId = (Guid)lessonCreateDTO.StudentId });
             }
