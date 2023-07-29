@@ -31,7 +31,7 @@ namespace StudentRegisterManagement.Data.Repository
 
         public Task<List<T>> GetAllAsync()
         {
-            return _context.Set<T>().ToListAsync();
+            return _context.Set<T>().AsNoTracking().ToListAsync();
         }
 
         public async Task<T> GetByIdAsync(Guid entityId)

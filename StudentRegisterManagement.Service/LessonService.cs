@@ -21,11 +21,14 @@ namespace StudentRegisterManagement.Service
         {
             Lesson lesson = _mapper.Map<Lesson>(lessonCreateDTO);
 
-            lesson.StudentLesson = new();
-#pragma warning disable IDE0028
-            lesson.StudentLesson.Add(new StudentLesson() { StudentId = lessonCreateDTO.StudentId });
+            if (lessonCreateDTO.StudentId != null) //Öğrenci Id verildi ise o ders ile ilşkilendirilir.
+            {
+                lesson.StudentLesson = new();
+                lesson.StudentLesson.Add(new StudentLesson() { StudentId = (Guid)lessonCreateDTO.StudentId });
+            }
+           
 
-            if (lessonCreateDTO.NotesCreateDTOs != null)
+            if (lessonCreateDTO.NotesCreateDTOs != null) // Derse ait notlar eklenir.
             {
                 lesson.Notes = new();
                 foreach (var notesCreate in lessonCreateDTO.NotesCreateDTOs)

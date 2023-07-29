@@ -52,9 +52,9 @@ namespace StudentRegisterManagement.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<CustomResponse<NoContent>>> GetAllStudent(StudentCreateDTO createDTO)
+        public async Task<ActionResult<CustomResponse<List<StudentDTO>>>> GetAllStudent()
         {
-            return  CreateActionResultInstance(await _studentService.CreateStudentAsync(createDTO));
+            return  CreateActionResultInstance(await _studentService.GetAllStudent());
         }
 
 

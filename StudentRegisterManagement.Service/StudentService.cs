@@ -20,14 +20,15 @@ namespace StudentRegisterManagement.Service
         public async Task<CustomResponse<NoContent>> CreateStudentAsync(StudentCreateDTO studentCreateDTO)
         {
             Student student = _mapper.Map<Student>(studentCreateDTO);
-            if (studentCreateDTO.LessonCreateDTOs != null)
+            if (studentCreateDTO.LessonCreateDTOs != null) // Öğrenci ile ilişkilendirilmek istenen dersler boş değil ise.
             {
                 student.StudentLessons = new();
                 foreach (var lessonCreate in studentCreateDTO.LessonCreateDTOs)
+                // Dersler için nesne yaratılarak student entity'sinde ilgili alana setlenir
                 {
                     Lesson lesson = _mapper.Map<Lesson>(lessonCreate);
                     student.StudentLessons.Add(new StudentLesson() { Lesson = lesson });
-                    if (lessonCreate.NotesCreateDTOs != null)
+                    if (lessonCreate.NotesCreateDTOs != null) // Derslere ait not eklenebilir.
                     {
                         lesson.Notes = new();
                         foreach (var notesCreate in lessonCreate.NotesCreateDTOs)
@@ -56,9 +57,23 @@ namespace StudentRegisterManagement.Service
             return CustomResponse<NoContent>.Success(200);
         }
 
-        public Task<CustomResponse<NoContent>> GetAllStudent()
+        public async Task<CustomResponse<List<StudentDTO>>> GetAllStudent()
         {
-            throw new NotImplementedException();
+            List<Student> students = await _unitOfWork.StudentRepository.GetAllAsync(); //Tüm Öğrenciler listelenir.
+            if (students == null) //Öğrenci yok ise hata mesaı dönülür.
+            {
+                return CustomResponse<List<StudentDTO>>.Fail(404, "Öğrenci Bulunamadı");
+            }
+
+            List<StudentDTO> resStudents = _mapper.Map<List<StudentDTO>>(students);
+            int totalAlan = resStudents.First().GetType().GetProperties().Count() - 1; //TotalRate alanı her entityde olduğu için çıkarılmıştır.
+            foreach (var studentDto in resStudents)
+            {
+                int doluAlanlar = studentDto.GetType().GetProperties().Select(x => x.GetValue(studentDto, null)).Where(x => x != null).Count();
+                studentDto.ProfileRate = (doluAlanlar*100)/ totalAlan;
+            }
+            resStudents = resStudents.OrderByDescending(x => x.ProfileRate).ToList();//BüyükTen küçüğe sıralama işlemi.
+            return CustomResponse<List<StudentDTO>>.Success(200, resStudents);
         }
 
         public async Task<CustomResponse<NoContent>> UpdateStudentAsync(StudentUpdateDTO studentUpdate)
