@@ -80,7 +80,7 @@ Bu endpoint ile yeni dersler oluşturabilir , istenilerse eklenecek ders var ola
 ```
 ###  api/Home/GetAllStudent
 Bu endpoint ile öğrenci kayıtları sorgulanmaktadır. 
-Öğrenci ile ilgli kayıtda alanların doluluk oranına göre yüzdesel bi hesaplama yapmakta ve yüzdeye göre en dolu profi en üstte göstermektedir.
+Öğrenci ile ilgli kayıtda alanların doluluk oranına göre yüzdesel bir hesaplama yapmakta ve yüzdeye göre en dolu profili en üstte göstermektedir.
 #### Örnek Json Veri : 
 ```
 {
